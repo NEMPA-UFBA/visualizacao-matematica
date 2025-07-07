@@ -1,5 +1,10 @@
 # Para começar com a nossa animação, nossa primeira linha de código deve ser "from manim import *". 
-from manim import * # Essa primeira linha é responsavel por importar da biblioteca manim todas as ferramentas necessárias para a construção da nossa animação.
+from manim import (
+    Scene, Text, Write, FadeOut, Polygon, VGroup, MathTex, Line, Create,
+    FadeIn, LaggedStart, Transform, Sector,
+    # Constantes
+    BLUE, BLUE_E, DOWN, UP, RED, GREEN, YELLOW, BLACK, LEFT, RIGHT, PI
+) # Essa primeira linha é responsável por importar da biblioteca manim todas as ferramentas necessárias para a construção da nossa animação.
 # Agora que temos o acesso a toda biblioteca manim, continuaremos com a nossa animação:
 
 class SomaDosAngulosInternosTriangulo(Scene): # "class SomaDosAngulosInternosTriangulo" É o nome que da nossa cena.
@@ -12,7 +17,7 @@ class SomaDosAngulosInternosTriangulo(Scene): # "class SomaDosAngulosInternosTri
         self.play(FadeOut(titulo)) # "self.play(FadeOut(titulo))" Anima o desaparecimento do título (FadeOut)
         self.wait(0.5) # Uma pausa de 0.5 segundos antes de começar a próxima cena.
 
-        # Agora iremos começar a construir o triângulo - começamdo pelos seus vertices.
+        # Agora iremos começar a construir o triângulo - começando pelos seus vertices.
         vertice_A = [-3, -1, 0] # Marca um ponto 3 unidades à esquerda do centro e 1 unidade para baixo.
         vertice_B = [3, -1, 0] # Marca um ponto 3 unidades à direita do centro e 1 unidade para baixo.
         vertice_C = [0, 2.5, 0] # Marca um ponto no centro horizontal (x=0) e 2.5 unidades para cima.
@@ -25,19 +30,19 @@ class SomaDosAngulosInternosTriangulo(Scene): # "class SomaDosAngulosInternosTri
         # "color=BLUE_E" Define a cor da borda do triângulo. 
         # "fill_opacity=0.6:"" Define a opacidade do preenchimento do polígono.
 
-        # Agora iremos "dar nome" aos vertines criados.
+        # Agora iremos "dar nome" aos vértices criados.
         rotulos_vertices = VGroup(
             MathTex("A").next_to(vertice_A, DOWN, buff=0.3), # O comando "MathTex(...)" cria o objeto de texto, neste caso, a letra "A". 
-            # ".next_to(...)" Diz ao Manim para colocar o objeto que acabámos de criar (a letra "A") "ao lado de" outra coisa.  
+            # ".next_to(...)" Diz ao Manim para colocar o objeto que acabamos de criar (a letra "A") "ao lado de" outra coisa.  
             # "DOWN" Diz que a letra "A" deve ser colocada abaixo do vertice_A. IMPORTANTE: Para o vértice C, usa-se UP para colocá-lo acima.
-            # "buff=0.3" é a distãncia entre o rotulo e o vértice.
+            # "buff=0.3" é a distância entre o rotulo e o vértice.
             # "VGroup(...)" Agrupa os objetos e os anima tudo numa só vez.
             MathTex("B").next_to(vertice_B, DOWN, buff=0.3), 
             MathTex("C").next_to(vertice_C, UP, buff=0.3))
         # Foi usado MathTex em vez de Text porque ele utiliza o LaTeX para renderizar.
         
         # Agora iremos criar os ângulos internos do triângulo e seus respectivos rótulos.  
-        # A ideia é fazer pequenos setores circulares coloridos para representar os ângulos internos do triângulo. Iremos criar segmentos "invisiveis" para construirmos os ângulos:
+        # A ideia é fazer pequenos setores circulares coloridos para representar os ângulos internos do triângulo. Iremos criar segmentos "invisíveis" para construirmos os ângulos:
         linha_AB = Line(vertice_A, vertice_B)
         linha_AC = Line(vertice_A, vertice_C)
         linha_BC = Line(vertice_B, vertice_C)
@@ -55,7 +60,7 @@ class SomaDosAngulosInternosTriangulo(Scene): # "class SomaDosAngulosInternosTri
         sector_B = Sector(arc_center=vertice_B, start_angle=linha_BC.get_angle(), angle=linha_BA.get_angle() - linha_BC.get_angle(), radius=0.7, color=GREEN, fill_opacity=0.8)
         sector_C = Sector(arc_center=vertice_C, start_angle=linha_CA.get_angle(), angle=linha_CB.get_angle() - linha_CA.get_angle(), radius=0.7, color=YELLOW, fill_opacity=0.8)
 
-        # Agora iremos criar os rotulos dos ângulos:
+        # Agora iremos criar os rótulos dos ângulos:
         rotulo_alpha = MathTex(r"\alpha", color=BLACK, font_size=36).move_to(sector_A.get_center_of_mass()) 
         #  "rotulo_alpha = MathTex(r"\alpha", color=BLACK, font_size=36)" Cria o rotulo do ângulo
         # ".move_to(sector_A.get_center_of_mass())" Coloca o rotulo no centro do ângulo
@@ -72,7 +77,7 @@ class SomaDosAngulosInternosTriangulo(Scene): # "class SomaDosAngulosInternosTri
             FadeIn(sector_A, scale=0.5), Write(rotulo_alpha), # Fará aparecer o ângulo e do seu rótulo.
             FadeIn(sector_B, scale=0.5), Write(rotulo_beta),
             FadeIn(sector_C, scale=0.5), Write(rotulo_gamma),
-            lag_ratio=0.5)) # Faz com que os ângulosam um após o outro.
+            lag_ratio=0.5)) # Faz com que os ângulos apareçam um após o outro.
         self.wait(0.2)
 
         # Agora iremos fazer a animação de recuo:
@@ -113,7 +118,7 @@ class SomaDosAngulosInternosTriangulo(Scene): # "class SomaDosAngulosInternosTri
         grupo_alvo_B = VGroup(alvo_B, rotulo_alvo_beta)
         grupo_alvo_A = VGroup(alvo_A, rotulo_alvo_alpha)
 
-        # Os três ângulos (α, β, γ) agora formamaram um semicírculo perfeito, alinhados sobre a linha de referência
+        # Os três ângulos (α, β, γ) agora formaram um semicírculo perfeito, alinhados sobre a linha de referência
         self.play(
             LaggedStart(
                 # "Transform(copia_C, grupo_alvo_C)" Ela pega o objeto copia_C (que está na posição original, no triângulo) e o transforma suavemente no objeto grupo_alvo_C (na posição final, sobre a linha guia).
