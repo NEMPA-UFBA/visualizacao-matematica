@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/robertosantanna/Downloads/Projetos/NEMPA/VS Code/visualizacao-matematica/media/videos/lorenz_attractor/480p15/partial_movie_files/LorenzAttractor/2325599634_3384561148_2137530970.mp4'
+file 'file:/Users/robertosantanna/Downloads/Projetos/NEMPA/VS Code/visualizacao-matematica/media/videos/lorenz_attractor/480p15/partial_movie_files/LorenzAttractor/1099790219_1603414991_4279774857.mp4'
+file 'file:/Users/robertosantanna/Downloads/Projetos/NEMPA/VS Code/visualizacao-matematica/media/videos/lorenz_attractor/480p15/partial_movie_files/LorenzAttractor/1264245977_3410464183_856834588.mp4'
+file 'file:/Users/robertosantanna/Downloads/Projetos/NEMPA/VS Code/visualizacao-matematica/media/videos/lorenz_attractor/480p15/partial_movie_files/LorenzAttractor/546226223_1531998346_3035772949.mp4'
