@@ -79,7 +79,7 @@ class LorenzAttractor(ThreeDScene):
             )
             tails.add(tail)
 
-        # Anima o surgimento das curvas
+        # Anima o surgimento das curvas do campo
         self.play(*[Create(c) for c in curves], run_time=6)
         self.add(dots, tails)
 
